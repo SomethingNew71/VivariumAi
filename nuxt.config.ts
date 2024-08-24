@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2024-08-24',
   app: {
     head: {
       meta: [
@@ -21,6 +22,13 @@ export default defineNuxtConfig({
           crossorigin: 'anonymous',
         },
       ],
+    },
+  },
+  runtimeConfig: {
+    public: {},
+    app: {
+      RPG_API_URL: process.env.RPG_API_URL,
+      LANGSMITH_API_KEY: process.env.LANGSMITH_API_KEY,
     },
   },
   devtools: { enabled: true },

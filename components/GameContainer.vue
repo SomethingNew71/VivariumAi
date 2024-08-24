@@ -1,7 +1,11 @@
 <script lang="ts" setup>
+  const { data, error } = await useFetch('/api/game/start');
+  console.log(data);
+  console.log(error);
+
   const userPrompt = ref('');
   const isLoading = ref(false);
-  const chatScrollPoint = ref(null);
+  const chatScrollPoint = ref<null | HTMLDivElement>(null);
   const submitPrompt = () => {
     if (!userPrompt.value) return;
     isLoading.value = true;
@@ -11,7 +15,7 @@
     });
     userPrompt.value = '';
     setTimeout(() => {
-      chatScrollPoint.value.scrollIntoView({ behavior: 'smooth' });
+      chatScrollPoint.value?.scrollIntoView({ behavior: 'smooth' });
     }, 200);
     setTimeout(() => {
       isLoading.value = false;
@@ -60,7 +64,7 @@
     },
   ]);
   onMounted(() => {
-    chatScrollPoint.value.scrollIntoView({ behavior: 'smooth' });
+    chatScrollPoint.value?.scrollIntoView({ behavior: 'smooth' });
   });
 </script>
 

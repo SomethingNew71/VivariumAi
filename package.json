@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@langchain/langgraph-sdk": "^0.0.6",
+    "@langchain/langgraph-sdk": "^0.0.7",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@tailwindcss/typography": "^0.5.14",
     "daisyui": "^4.12.10",

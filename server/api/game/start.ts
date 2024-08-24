@@ -1,11 +1,11 @@
 import { Client } from '@langchain/langgraph-sdk';
 
-const client = new Client();
-
 export default defineEventHandler(async (event) => {
-  //API keys are stored in the environment variables
   const config = useRuntimeConfig();
-  const body: any = await readBody(event);
+  const client = new Client({
+    apiUrl: config.app.RPG_API_URL,
+    apiKey: config.app.LANGSMITH_API_KEY,
+  });
 
   // List all assistants
   const assistants = await client.assistants.search({
@@ -18,7 +18,9 @@ export default defineEventHandler(async (event) => {
   const agent = assistants[0];
 
   // Start a new thread
-  const thread = await client.threads.create();
+  const thread = await client.threads.get(
+    '61118b10-269c-4144-854b-f3f5cdfea05e'
+  );
 
   // Start a streaming run
   const messages = [{ role: 'human', content: "what's the weather in la" }];
@@ -35,5 +37,5 @@ export default defineEventHandler(async (event) => {
     console.log(chunk);
   }
 
-  return await { test: 'api works' };
+  return { test: 'api works' };
 });
