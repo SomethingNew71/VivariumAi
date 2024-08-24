@@ -1,0 +1,21 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@langchain/langgraph-sdk": "^0.0.6",
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "@tailwindcss/typography": "^0.5.14",
+    "daisyui": "^4.12.10",
+    "nuxt": "^3.13.0",
+    "redirect-ssl": "^3.0.0",
+    "vue": "latest"
+  }
+}
