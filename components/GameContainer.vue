@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-  const { data, error } = await useFetch('/api/game/start');
-  console.log(data);
-  console.log(error);
-
   const userPrompt = ref('');
   const isLoading = ref(false);
   const chatScrollPoint = ref<null | HTMLDivElement>(null);
@@ -34,43 +30,15 @@
       text: 'You underestimate my power.',
       isUser: true,
     },
-    {
-      text: 'You underestimate my power.',
-      isUser: true,
-    },
-    {
-      text: "It's over Anakin, I have the high ground.",
-      isUser: false,
-    },
-    {
-      text: 'You underestimate my power.',
-      isUser: true,
-    },
-    {
-      text: "It's over Anakin, I have the high ground.",
-      isUser: false,
-    },
-    {
-      text: 'You underestimate my power.',
-      isUser: true,
-    },
-    {
-      text: "It's over Anakin, I have the high ground.",
-      isUser: false,
-    },
-    {
-      text: 'You underestimate my power.',
-      isUser: true,
-    },
   ]);
-  onMounted(() => {
-    chatScrollPoint.value?.scrollIntoView({ behavior: 'smooth' });
-  });
+  // onMounted(() => {
+  //   chatScrollPoint.value?.scrollIntoView({ behavior: 'smooth' });
+  // });
 </script>
 
 <template>
   <div
-    class="p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-8 lg:col-start-3 lg:col-span-8 text-center text-lg"
+    class="animate__animated animate__backInUp p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-8 lg:col-start-3 lg:col-span-8 text-center text-lg"
   >
     <div class="card lg:card-side bg-base-300 shadow-xl">
       <figure>

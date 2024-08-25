@@ -2,7 +2,7 @@
   <div class="navbar bg-base-100">
     <div class="navbar-start"></div>
     <div class="navbar-center">
-      <a class="btn btn-ghost text-xl">Welcome to Vivarium</a>
+      <a class="btn btn-ghost text-4xl jaro-logo text-primary">VivariumAI</a>
     </div>
     <div class="navbar-end">
       <button class="btn btn-ghost btn-circle">

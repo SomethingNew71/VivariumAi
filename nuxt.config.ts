@@ -39,6 +39,16 @@ export default defineNuxtConfig({
           rel: 'manifest',
           href: '/favicon/site.webmanifest',
         },
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: 'anonymous',
+        },
+        {
+          href: 'https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap',
+          rel: 'stylesheet',
+        },
       ],
       script: [
         {
@@ -55,6 +65,7 @@ export default defineNuxtConfig({
       LANGSMITH_API_KEY: process.env.LANGSMITH_API_KEY,
     },
   },
+  css: ['@/assets/main.scss'],
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
 });
