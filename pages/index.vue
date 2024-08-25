@@ -30,7 +30,7 @@
 </script>
 <template>
   <Navbar />
-  <div class="grid grid-cols-12 px-24">
+  <div class="grid grid-cols-12">
     <Welcome v-if="!gameStarted" @start-game="begin" />
     <GameContainer v-if="gameStarted" />
   </div>

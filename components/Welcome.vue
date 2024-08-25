@@ -1,6 +1,6 @@
 <template>
   <div
-    class="animate__animated animate__backInUp p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-8 lg:col-start-1 lg:col-span-12 text-center text-lg"
+    class="animate__animated animate__backInUp p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-10 lg:col-start-1 lg:col-span-12 text-center text-lg"
   >
     <div class="card lg:card-side bg-base-300 shadow-xl">
       <figure class="">
@@ -26,11 +26,17 @@
           resource management, and tactical combat as players work to revive the
           moon's ecosystem.
         </p>
+        <div class="divider divider-neutral"></div>
         <p class="text-2xl text-secondary">
           Do you have what it takes to restore this deserted world?
         </p>
-        <div class="card-actions justify-end mt-7 mb-7">
-          <button class="btn btn-primary btn-lg" @click="$emit('startGame')">
+        <div class="divider divider-neutral"></div>
+
+        <div class="card-actions justify-end mt-7 mb-7 jaro-logo">
+          <button
+            class="btn btn-primary btn-lg text-2xl"
+            @click="$emit('startGame')"
+          >
             Begin the Game
           </button>
         </div>

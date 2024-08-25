@@ -17,9 +17,10 @@
       isLoading.value = false;
     }, 2000);
   };
-  const secondaryAction = () => {
-    console.log('Secondary Action');
-  };
+
+  function restartGame() {
+    console.log('Restarting Game');
+  }
 
   const chatList = ref([
     {
@@ -38,18 +39,17 @@
 
 <template>
   <div
-    class="animate__animated animate__backInUp p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-8 lg:col-start-3 lg:col-span-8 text-center text-lg"
+    class="animate__animated animate__backInUp p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-10 lg:col-start-2 lg:col-span-10"
   >
     <div class="card lg:card-side bg-base-300 shadow-xl">
       <figure>
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"
-          alt="Album"
-        />
+        <img class="cover" src="/img/welcome1.png" alt="Album" />
       </figure>
-      <div class="card-body">
-        <h2 class="card-title pb-10">Let your Journey Begin</h2>
-        <div class="chat-container max-h-128 overflow-y-auto pb-10">
+      <div class="card-body lg:min-w-96 lg:max-w-128 xl:min-w-224 xl:max-w-3xl">
+        <h2 class="card-title pb-5">Let your Journey Begin</h2>
+        <div
+          class="chat-container bg-base-100 min-h-96 max-h-svh overflow-y-auto pb-32 px-4 pt-3"
+        >
           <div
             v-for="(chat, index) in chatList"
             :key="index"
@@ -60,16 +60,16 @@
             }"
           >
             <div class="chat-image avatar">
-              <div class="w-10 rounded-full">
-                <img
+              <div class="w-10 rounded-full text-center">
+                <i
                   v-if="!chat.isUser"
-                  alt="Tailwind CSS chat bubble component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
-                <img
-                  alt="Tailwind CSS chat bubble component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+                  class="text-4xl text-primary fa-duotone fa-solid fa-microchip-ai"
+                ></i>
+
+                <i
+                  v-if="chat.isUser"
+                  class="text-4xl fa-duotone fa-solid fa-user-astronaut"
+                ></i>
               </div>
             </div>
             <div class="chat-header">
@@ -97,8 +97,9 @@
           ></textarea>
         </div>
         <div class="card-actions justify-end">
-          <button class="btn btn-accent" @click="secondaryAction()">
-            Other Action
+          <button class="btn btn-error" onclick="my_modal_5.showModal()">
+            <i class="fa-duotone fa-solid fa-triangle-exclamation"></i> Restart
+            Game
           </button>
           <button class="btn btn-primary" @click="submitPrompt()">
             <span v-if="isLoading" class="loading loading-spinner"></span>
@@ -107,5 +108,22 @@
         </div>
       </div>
     </div>
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <h3 class="text-2xl font-bold text-error">
+          Are you sure you want to restart?
+        </h3>
+        <p class="py-4">
+          All of your progress will be lost forever and you will need to restart
+          from the beginning. This is a one way street...
+        </p>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn btn-error" @click="restartGame()">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
   </div>
 </template>
