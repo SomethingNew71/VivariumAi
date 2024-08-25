@@ -16,6 +16,30 @@ export default defineNuxtConfig({
           content: 'Vivarium AI',
         },
       ],
+      link: [
+        {
+          rel: 'apple-touch-icon',
+          href: '/favicon/apple-touch-icon.png',
+          sizes: '180x180',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/favicon/favicon-32x32.png',
+          sizes: '32x32',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/favicon/favicon-16x16.png',
+          sizes: '16x16',
+        },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' },
+        {
+          rel: 'manifest',
+          href: '/favicon/site.webmanifest',
+        },
+      ],
       script: [
         {
           src: 'https://kit.fontawesome.com/8c20175850.js',
