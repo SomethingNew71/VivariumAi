@@ -1,9 +1,16 @@
 <script lang="ts" setup>
   const userPrompt = ref('');
+  const emptyMessage = ref(false);
   const isLoading = ref(false);
   const chatScrollPoint = ref<null | HTMLDivElement>(null);
   const submitPrompt = () => {
-    if (!userPrompt.value) return;
+    if (!userPrompt.value) {
+      emptyMessage.value = true;
+      setTimeout(() => {
+        emptyMessage.value = false;
+      }, 2000);
+      return;
+    }
     isLoading.value = true;
     chatList.value.push({
       text: userPrompt.value,
@@ -39,14 +46,13 @@
 
 <template>
   <div
-    class="animate__animated animate__backInUp p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-10 lg:col-start-2 lg:col-span-10"
+    class="animate__animated animate__backInRight p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-10 lg:col-start-2 lg:col-span-10"
   >
     <div class="card lg:card-side bg-base-300 shadow-xl">
       <figure>
         <img class="cover" src="/img/welcome1.png" alt="Album" />
       </figure>
       <div class="card-body lg:min-w-96 lg:max-w-128 xl:min-w-224 xl:max-w-3xl">
-        <h2 class="card-title pb-5">Let your Journey Begin</h2>
         <div
           class="chat-container bg-base-100 min-h-96 max-h-svh overflow-y-auto pb-32 px-4 pt-3"
         >
@@ -95,11 +101,23 @@
             class="textarea textarea-primary w-full"
             placeholder=""
           ></textarea>
+          <div class="label w-full">
+            <span class="label-text-alt"></span>
+            <span v-if="emptyMessage" class="label-text-alt text-error"
+              >Please enter a message!</span
+            >
+          </div>
         </div>
         <div class="card-actions justify-end">
-          <button class="btn btn-error" onclick="my_modal_5.showModal()">
+          <button class="btn btn-error" onclick="restart_modal.showModal()">
             <i class="fa-duotone fa-solid fa-triangle-exclamation"></i> Restart
             Game
+          </button>
+          <button
+            class="btn btn-square btn-accent"
+            onclick="help_modal.showModal()"
+          >
+            <i class="text-2xl fa-duotone fa-solid fa-question"></i>
           </button>
           <button class="btn btn-primary" @click="submitPrompt()">
             <span v-if="isLoading" class="loading loading-spinner"></span>
@@ -108,7 +126,7 @@
         </div>
       </div>
     </div>
-    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+    <dialog id="restart_modal" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
         <h3 class="text-2xl font-bold text-error">
           Are you sure you want to restart?
@@ -121,6 +139,21 @@
           <form method="dialog">
             <!-- if there is a button in form, it will close the modal -->
             <button class="btn btn-error" @click="restartGame()">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+    <dialog id="help_modal" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">How to play</h3>
+        <p class="py-4">
+          Follow the on screen prompts and respond just like you would with a
+          normal person.
+        </p>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
           </form>
         </div>
       </div>

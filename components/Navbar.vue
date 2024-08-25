@@ -1,7 +1,7 @@
 <template>
   <div class="navbar bg-base-100 py-5">
     <div class="navbar-start">
-      <a class="btn btn-ghost text-4xl jaro-logo text-primary">VivariumAI</a>
+      <h1 class="pl-2 text-4xl jaro-logo text-primary">VivariumAI</h1>
     </div>
     <div class="navbar-end">
       <div class="hidden md:flex">

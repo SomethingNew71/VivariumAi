@@ -1,6 +1,6 @@
 <template>
   <div
-    class="animate__animated animate__backInUp p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-10 lg:col-start-1 lg:col-span-12 text-center text-lg"
+    class="animate__animated animate__backInRight p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-10 lg:col-start-1 lg:col-span-12 text-center text-lg"
   >
     <div class="card lg:card-side bg-base-300 shadow-xl">
       <figure class="">
