@@ -1,13 +1,8 @@
 <script lang="ts" setup>
-  import Welcome from '~/components/Welcome.vue';
   const gameStarted = ref(false);
-  const hideWelcome = ref(false);
 
   const begin = () => {
     gameStarted.value = true;
-    setTimeout(() => {
-      hideWelcome.value = true;
-    }, 10);
   };
 
   useHead({
@@ -35,17 +30,7 @@
 <template>
   <Navbar />
   <div class="grid grid-cols-12">
-    <Welcome
-      :class="{
-        animate__backOutLeft: gameStarted,
-        hidden: hideWelcome,
-      }"
-      @start-game="begin"
-    />
-    <GameContainer
-      :class="{
-        hidden: !hideWelcome && !gameStarted,
-      }"
-    />
+    <Welcome v-if="!gameStarted" @start-game="begin" />
+    <GameContainer v-if="gameStarted" />
   </div>
 </template>

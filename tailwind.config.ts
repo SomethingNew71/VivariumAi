@@ -1,5 +1,8 @@
 module.exports = {
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  daisyui: {
+    theme: 'dark',
+  },
   theme: {
     extend: {
       spacing: {

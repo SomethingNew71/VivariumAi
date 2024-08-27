@@ -1,4 +1,23 @@
 <script lang="ts" setup>
+  import type { ChatElement } from '~/data/models';
+  import createClient from 'openapi-fetch';
+  const client = createClient({ baseUrl: '/api' });
+
+  const { data } = await useFetch(() => `/api/game/start`);
+  console.log(data?.value?.thread_id);
+
+  await client
+    // @ts-ignore
+    .POST('/game/chat', {
+      body: {
+        thread_id: data?.value?.thread_id,
+        message: 'Hello',
+      },
+    })
+    .then((response) => {
+      console.log(response);
+    });
+
   const userPrompt = ref('');
   const emptyMessage = ref(false);
   const isLoading = ref(false);
@@ -29,19 +48,7 @@
     console.log('Restarting Game');
   }
 
-  const chatList = ref([
-    {
-      text: "It's over Anakin, I have the high ground.",
-      isUser: false,
-    },
-    {
-      text: 'You underestimate my power.',
-      isUser: true,
-    },
-  ]);
-  // onMounted(() => {
-  //   chatScrollPoint.value?.scrollIntoView({ behavior: 'smooth' });
-  // });
+  const chatList = ref<ChatElement[]>([]);
 </script>
 
 <template>
