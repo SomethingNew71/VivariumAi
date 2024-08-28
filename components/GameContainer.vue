@@ -1,65 +1,69 @@
 <script lang="ts" setup>
   import type { ChatElement } from '~/data/models';
-  import createClient from 'openapi-fetch';
-  const client = createClient({ baseUrl: '/api' });
+  import VueMarkdown from 'vue-markdown-render';
 
-  const { data } = await useFetch(() => `/api/game/start`);
-  console.log(data?.value?.thread_id);
-
-  await client
-    // @ts-ignore
-    .POST('/game/chat', {
-      body: {
-        thread_id: data?.value?.thread_id,
-        message: 'Hello',
-      },
-    })
-    .then((response) => {
-      console.log(response);
-    });
-
+  const chatList = ref<ChatElement[]>([]);
   const userPrompt = ref('');
   const emptyMessage = ref(false);
   const isLoading = ref(false);
   const chatScrollPoint = ref<null | HTMLDivElement>(null);
-  const submitPrompt = () => {
+  const thread_id = ref<string>('');
+  useFetch(() => `/api/start`).then(({ data: initialChatState, error }) => {
+    console.log(error);
+    console.log(initialChatState.value);
+    thread_id.value = initialChatState?.value?.thread_id || '';
+    chatList.value.push({
+      // @ts-ignore
+      text: initialChatState?.value?.state?.turns[0]?.output.content,
+      isUser: false,
+    });
+  });
+
+  async function submitPrompt() {
     if (!userPrompt.value) {
       emptyMessage.value = true;
-      setTimeout(() => {
-        emptyMessage.value = false;
-      }, 2000);
       return;
     }
-    isLoading.value = true;
     chatList.value.push({
       text: userPrompt.value,
       isUser: true,
     });
-    userPrompt.value = '';
+    // @ts-ignore
+    await useFetch(() => `/api/chat`, {
+      method: 'POST',
+      body: {
+        thread_id: thread_id.value,
+        message: userPrompt.value,
+      },
+    }).then(({ data: chatData, error }) => {
+      console.log(chatData);
+      chatList.value.push({
+        // @ts-ignore
+        text: chatData?.value?.turns[0]?.output.content,
+        isUser: false,
+      });
+      userPrompt.value = '';
+    });
+
     setTimeout(() => {
       chatScrollPoint.value?.scrollIntoView({ behavior: 'smooth' });
     }, 200);
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 2000);
-  };
+  }
 
   function restartGame() {
     console.log('Restarting Game');
   }
-
-  const chatList = ref<ChatElement[]>([]);
 </script>
 
 <template>
   <div
     class="animate__animated animate__backInRight p-8 col-span-12 sm:col-span-full md:col-start-2 md:col-span-10 lg:col-start-2 lg:col-span-10"
   >
-    <div class="card lg:card-side bg-base-300 shadow-xl">
-      <figure>
-        <img class="cover" src="/img/welcome1.png" alt="Album" />
+    <div class="card xl:card-side bg-base-300 shadow-xl">
+      <figure class="md:max-h-96 xl:max-h-full">
+        <img src="/img/welcome1.png" alt="Album" />
       </figure>
-      <div class="card-body lg:min-w-96 lg:max-w-128 xl:min-w-224 xl:max-w-3xl">
+      <div class="card-body lg:min-w-96 lg:max-w-128 xl:min-w-128 xl:max-w-3xl">
         <div
           class="chat-container bg-base-100 min-h-96 max-h-svh overflow-y-auto pb-32 px-4 pt-3"
         >
@@ -95,9 +99,16 @@
                 'chat-bubble-primary': chat.isUser,
               }"
             >
-              {{ chat.text }}
+              <vue-markdown
+                :source="chat.text"
+                :options="{ breaks: true, typographer: true }"
+              />
             </div>
           </div>
+          <span
+            v-if="chatList.length === 0"
+            class="mx-auto loading loading-infinity loading-lg"
+          ></span>
           <div ref="chatScrollPoint"></div>
         </div>
         <div class="card-actions justify-center">
