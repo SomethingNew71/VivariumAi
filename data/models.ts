@@ -3,10 +3,17 @@ import type { DefaultValues } from '@langchain/langgraph-sdk';
 export interface ChatInput {
   message: string;
   thread_id: string;
+  assistant_id: string;
 }
 export interface ChatElement {
   text: string;
   isUser: boolean;
+}
+
+export interface ChatResponse {
+  thread_id: string;
+  assistant_id: string;
+  state: any;
 }
 
 export interface ChatState {
