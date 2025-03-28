@@ -9,7 +9,7 @@
   const chatScrollPoint = ref<null | HTMLDivElement>(null);
   const thread_id = ref<string>('');
   const assistant_id = ref<string>('');
-  useFetch(() => `/api/start`).then(({ data: initialChatState, error }) => {
+  useFetch(() => `/api/start`).then(({ data: initialChatState }) => {
     thread_id.value = initialChatState?.value?.thread_id || '';
     assistant_id.value = initialChatState?.value?.assistant_id || '';
     chatList.value.push({

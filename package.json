@@ -10,22 +10,23 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@langchain/langgraph-sdk": "^0.0.7",
-    "@nuxtjs/tailwindcss": "^6.12.1",
-    "@tailwindcss/typography": "^0.5.14",
+    "@langchain/langgraph-sdk": "^0.0.60",
+    "@nuxtjs/tailwindcss": "^6.13.2",
+    "@tailwindcss/typography": "^0.5.16",
     "animate.css": "^4.1.1",
-    "daisyui": "^4.12.10",
-    "nuxt": "^3.13.0",
-    "openapi-fetch": "^0.11.1",
+    "caniuse-lite": "^1.0.30001707",
+    "daisyui": "^5.0.9",
+    "nuxt": "^3.16.1",
+    "openapi-fetch": "^0.13.5",
     "redirect-ssl": "^3.0.0",
-    "rxjs": "^7.8.1",
-    "sass": "^1.77.8",
+    "rxjs": "^7.8.2",
+    "sass": "^1.86.0",
     "vue": "latest",
     "vue-markdown-render": "^2.2.1"
   },
   "devDependencies": {
     "@types/markdown-it": "^14.1.2",
-    "openapi-typescript": "^7.3.0",
-    "typescript": "^5.5.4"
+    "openapi-typescript": "^7.6.1",
+    "typescript": "^5.8.2"
   }
 }

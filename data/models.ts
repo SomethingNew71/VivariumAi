@@ -1,5 +1,3 @@
-import type { DefaultValues } from '@langchain/langgraph-sdk';
-
 export interface ChatInput {
   message: string;
   thread_id: string;
